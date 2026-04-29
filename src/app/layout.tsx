@@ -3,6 +3,14 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import DisableDevTools from "@/components/DisableDevTools";
 import MobileWarning from "@/components/MobileWarning";
+import {
+  ogImage,
+  seoKeywords,
+  siteDescription,
+  siteName,
+  siteTitle,
+  siteUrl,
+} from "@/lib/seo";
 
 const poppins = Poppins({
   weight: ['300', '400', '500', '600', '700'],
@@ -11,8 +19,58 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Qadoqdizayn.uz",
-  description: "Professional qadoqlash dizayni xizmatlari",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: siteTitle,
+    template: `%s | ${siteName}`,
+  },
+  description: siteDescription,
+  applicationName: siteName,
+  authors: [{ name: "Islombek Botirov", url: siteUrl }],
+  creator: "Islombek Botirov",
+  publisher: siteName,
+  keywords: seoKeywords,
+  category: "Packaging Design",
+  alternates: {
+    canonical: "/",
+    languages: {
+      uz: "/",
+      "x-default": "/",
+    },
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "uz_UZ",
+    url: siteUrl,
+    siteName,
+    title: siteTitle,
+    description: siteDescription,
+    images: [
+      {
+        url: ogImage,
+        width: 1200,
+        height: 675,
+        alt: "Qadoqdizayn.uz professional qadoq dizayn portfolio",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: siteDescription,
+    images: [ogImage],
+  },
   icons: {
     icon: "/icon.svg",
     shortcut: "/icon.svg",
@@ -30,7 +88,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="uz" suppressHydrationWarning>
       <body className={`${poppins.variable} antialiased font-sans`}>
         <DisableDevTools />
         <MobileWarning />

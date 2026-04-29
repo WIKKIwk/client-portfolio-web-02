@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import BlurText from "@/components/BlurText";
 import { Poppins } from "next/font/google";
 
@@ -7,7 +8,6 @@ const poppinsFont = Poppins({ subsets: ['latin'], weight: ['300', '400', '500', 
 
 export default function AnimatedIntro() {
     const wordDelayMs = 10; // yanada darrov chiqib kelishi uchun 10ms
-    const trackingClass = "tracking-normal"; // o'ziga xos qalin shrift
 
     const text1 = "Men Islombek Botirov, 6 yil davomida turli sohalardagi brendlar uchun qadoq dizayni yaratish bilan shug‘ullanaman.";
     const text2 = "Maqsadim mahsulotingiz xaridor qo‘lida ajralib turishi, esda qolishi va brendingizni to‘liq ifodalashiga yordam berish.";
@@ -61,9 +61,11 @@ export default function AnimatedIntro() {
                 {/* Hand Image mapped to the right - with Scroll trigger */}
                 <div ref={handRef} className="relative w-1/2 md:w-[40%] lg:w-[35%] flex items-center justify-end pointer-events-none z-0">
                     {showHand && (
-                        <img
-                            src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/qol.svg?t=${Date.now()}`}
+                        <Image
+                            src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/qol.svg`}
                             alt="Qo'l rasmi"
+                            width={220}
+                            height={220}
                             className="w-full max-w-[100px] lg:max-w-[160px] xl:max-w-[220px] h-auto object-contain drop-shadow-2xl opacity-40 lg:opacity-100"
                         />
                     )}

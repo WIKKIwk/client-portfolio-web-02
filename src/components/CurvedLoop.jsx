@@ -32,6 +32,7 @@ const CurvedLoop = ({
   const lastXRef = useRef(0);
   const dirRef = useRef(direction);
   const velRef = useRef(0);
+  const [isDragging, setIsDragging] = useState(false);
 
   const textLength = spacing;
   const totalText = textLength
@@ -97,6 +98,7 @@ const CurvedLoop = ({
   const onPointerDown = e => {
     if (!interactive) return;
     dragRef.current = true;
+    setIsDragging(true);
     lastXRef.current = e.clientX;
     velRef.current = 0;
     e.target.setPointerCapture(e.pointerId);
@@ -121,10 +123,11 @@ const CurvedLoop = ({
   const endDrag = () => {
     if (!interactive) return;
     dragRef.current = false;
+    setIsDragging(false);
     dirRef.current = velRef.current > 0 ? 'right' : 'left';
   };
 
-  const cursorStyle = interactive ? (dragRef.current ? 'grabbing' : 'grab') : 'auto';
+  const cursorStyle = interactive ? (isDragging ? 'grabbing' : 'grab') : 'auto';
 
   return (
     <div
@@ -147,7 +150,7 @@ const CurvedLoop = ({
         </defs>
         {ready && (
           <text xmlSpace="preserve" className={className}>
-            <textPath ref={textPathRef} href={`#${pathId}`} startOffset={offsetRef.current + 'px'} xmlSpace="preserve">
+            <textPath ref={textPathRef} href={`#${pathId}`} startOffset={`${-spacing}px`} xmlSpace="preserve">
               {totalText}
             </textPath>
           </text>

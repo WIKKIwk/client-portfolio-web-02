@@ -64,7 +64,6 @@ export default function Counter({
   fontSize = 100,
   padding = 0,
   places = [...value.toString()].map((ch, i, a) => {
-    ch == '.';
     if (ch === '.') {
       return '.';
     } else {

@@ -5,14 +5,17 @@ import Image from "next/image";
 import data from "@/lib/portfolioData.json";
 import FadeInItem from "@/components/FadeInItem";
 
+type PortfolioData = Record<string, string[]>;
+
+const portfolioData = data as PortfolioData;
+
 export default function PortfolioGrid() {
   const [open, setOpen] = useState(false);
   const [images, setImages] = useState<{ src: string }[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const openLightbox = (num: number) => {
-    // @ts-ignore
-    const projImages = data[`project-${num}`] || [];
+    const projImages = portfolioData[`project-${num}`] || [];
     const base = process.env.NEXT_PUBLIC_BASE_PATH || '';
     const allImages = [
       `${base}/porta/${num}.webp`,
@@ -21,12 +24,10 @@ export default function PortfolioGrid() {
     setImages(allImages);
     setCurrentIndex(0);
     setOpen(true);
-    document.body.style.overflow = 'hidden';
   };
 
   const closeLightbox = useCallback(() => {
     setOpen(false);
-    document.body.style.overflow = 'auto';
   }, []);
 
   const nextImage = useCallback(() => {
@@ -51,12 +52,15 @@ export default function PortfolioGrid() {
     return () => window.removeEventListener('keydown', handleKey);
   }, [open, closeLightbox, nextImage, prevImage]);
 
-  // Unmount da skrollni tiklash
   useEffect(() => {
+    if (!open) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
     return () => {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = previousOverflow;
     };
-  }, []);
+  }, [open]);
 
   return (
     <>

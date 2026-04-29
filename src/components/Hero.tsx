@@ -4,26 +4,15 @@ import Image from "next/image";
 import { Poppins } from "next/font/google";
 import BlurText from "@/components/BlurText";
 import ShinyText from "@/components/ShinyText";
-import LightRays from "@/components/LightRays";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const poppinsFont = Poppins({ subsets: ['latin'], weight: ['300', '400', '500', '600', '700'] });
+const shineDurationMs = 2500; // Har bir yaltirash 2.5 sekund
+const overlapMs = 700; // Qancha vaqt oldin keyingisi boshlanishi
+const intervalMs = shineDurationMs - overlapMs; // 1.8 sekundda navbatdagisi boshlanadi
 
 export default function Hero() {
-    const shineDurationMs = 2500; // Har bir yaltirash 2.5 sekund
-    const overlapMs = 700; // Qancha vaqt oldin keyingisi boshlanishi
-    const intervalMs = shineDurationMs - overlapMs; // 1.8 sekundda navbatdagisi boshlanadi
-
     const [actives, setActives] = useState([false, false, false, false]);
-    const [isScrolled, setIsScrolled] = useState(false);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 50);
-        };
-        window.addEventListener("scroll", handleScroll, { passive: true });
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
 
     useEffect(() => {
         // Funksiya bittasini yoqadi va 2.5s dan keyin o'chiradi
@@ -55,17 +44,21 @@ export default function Hero() {
 
     return (
         <section className="relative w-full overflow-hidden bg-black flex flex-col items-center justify-center">
-            {/* Logo in top left corner */}
+            <h1 className="sr-only">
+                Qadoq dizayn va package design xizmatlari - Qadoqdizayn.uz
+            </h1>
+
             <div className="absolute top-8 left-8 md:top-14 md:left-14 lg:top-16 lg:left-16 z-20 mix-blend-difference">
-                <img
+                <Image
                     src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/logo.svg`}
-                    alt="Logo"
+                    alt="Qadoqdizayn.uz logo"
+                    width={160}
+                    height={80}
                     className="w-[80px] md:w-[120px] lg:w-[160px] h-auto object-contain drop-shadow-lg"
                 />
             </div>
 
-            {/* Navigation top right */}
-            <nav className={`fixed top-0 right-0 pt-8 pr-6 md:pt-16 md:pr-16 lg:pt-20 pb-10 pl-20 z-50 flex items-start gap-6 md:gap-14 mix-blend-difference w-full justify-end font-light tracking-[0.05em] md:tracking-[0.1em] text-sm sm:text-base md:text-lg lg:text-xl transition-opacity duration-1000 ${isScrolled ? 'opacity-0 hover:opacity-100' : 'opacity-100'}`}>
+            <nav aria-label="Asosiy bo'limlar" className="absolute top-0 right-0 pt-8 pr-6 md:pt-16 md:pr-16 lg:pt-20 pb-10 pl-20 z-20 flex items-start gap-6 md:gap-14 mix-blend-difference w-full justify-end font-light tracking-[0.05em] md:tracking-[0.1em] text-sm sm:text-base md:text-lg lg:text-xl">
                 <a href="#asoschi" className="transition-transform duration-300 hover:scale-110 active:scale-95">
                     <ShinyText text="Asoschi" speed={shineDurationMs / 1000} disabled={!actives[0]} color="#9ca3af" shineColor="#ffffff" />
                 </a>
@@ -81,7 +74,7 @@ export default function Hero() {
             </nav>
             <Image
                 src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/gogo.webp`}
-                alt="Portrait Background"
+                alt="Islombek Botirov qadoq dizayn va package design portfolio rasmi"
                 width={7996}
                 height={4496}
                 priority

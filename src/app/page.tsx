@@ -1,6 +1,5 @@
 import Hero from "@/components/Hero";
 import AnimatedIntro from "@/components/AnimatedIntro";
-import GradualBlur from "@/components/GradualBlur";
 import CurvedLoop from "@/components/CurvedLoop";
 import FadeInItem from "@/components/FadeInItem";
 import ShinyText from "@/components/ShinyText";
@@ -10,12 +9,155 @@ import AnimatedCounter from "@/components/AnimatedCounter";
 import LightRays from "@/components/LightRays";
 import Image from "next/image";
 import { Poppins } from "next/font/google";
+import {
+  contactPhones,
+  seoKeywords,
+  siteDescription,
+  siteName,
+  siteTitle,
+  siteUrl,
+  telegramUrl,
+} from "@/lib/seo";
 
 const poppinsFont = Poppins({ subsets: ['latin'], weight: ['300', '400', '500', '600', '700'] });
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      name: siteName,
+      alternateName: ["Qadoqchi", "Qadoq dizayn", "Qadoqdizayn"],
+      url: siteUrl,
+      inLanguage: "uz",
+      description: siteDescription,
+      keywords: seoKeywords.join(", "),
+      publisher: {
+        "@id": `${siteUrl}/#business`,
+      },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${siteUrl}/#webpage`,
+      url: siteUrl,
+      name: siteTitle,
+      isPartOf: {
+        "@id": `${siteUrl}/#website`,
+      },
+      about: {
+        "@id": `${siteUrl}/#business`,
+      },
+      primaryImageOfPage: {
+        "@id": `${siteUrl}/#hero-image`,
+      },
+      inLanguage: "uz",
+      description: siteDescription,
+    },
+    {
+      "@type": "ImageObject",
+      "@id": `${siteUrl}/#hero-image`,
+      url: `${siteUrl}/gogo.webp`,
+      caption: "Qadoqdizayn.uz qadoq dizayn portfolio sahifasi",
+    },
+    {
+      "@type": ["ProfessionalService", "LocalBusiness"],
+      "@id": `${siteUrl}/#business`,
+      name: siteName,
+      legalName: "Qadoqdizayn.uz",
+      url: siteUrl,
+      image: `${siteUrl}/logo.svg`,
+      logo: `${siteUrl}/logo.svg`,
+      description: siteDescription,
+      founder: {
+        "@id": `${siteUrl}/#islombek-botirov`,
+      },
+      telephone: contactPhones,
+      contactPoint: contactPhones.map((telephone) => ({
+        "@type": "ContactPoint",
+        telephone,
+        contactType: "customer service",
+        availableLanguage: ["uz"],
+      })),
+      areaServed: [
+        {
+          "@type": "Country",
+          name: "Uzbekistan",
+        },
+        {
+          "@type": "Place",
+          name: "Toshkent",
+        },
+      ],
+      sameAs: [telegramUrl],
+      makesOffer: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Qadoq dizayn va package design",
+            serviceType: "Packaging design",
+            description:
+              "Brend xarakteriga mos professional qadoqlash dizayni, premium packaging, rebranding, mockup va poligrafik dizayn.",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Mahsulot uchun vizual identitet",
+            serviceType: "Brand identity for packaged products",
+            description:
+              "Mahsulot polkada ajralib turishi va xaridor esida qolishi uchun sotuvga yo'naltirilgan vizual konsepsiya.",
+          },
+        },
+      ],
+    },
+    {
+      "@type": "Person",
+      "@id": `${siteUrl}/#islombek-botirov`,
+      name: "Islombek Botirov",
+      jobTitle: "Qadoq dizayner",
+      url: siteUrl,
+      worksFor: {
+        "@id": `${siteUrl}/#business`,
+      },
+      sameAs: [telegramUrl],
+      knowsAbout: [
+        "Qadoq dizayn",
+        "Package design",
+        "Packaging design",
+        "Poligrafik dizayn",
+        "Rebranding",
+        "Mockup tayyorlash",
+        "Premium packaging",
+      ],
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${siteUrl}/#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Qadoqdizayn.uz",
+          item: siteUrl,
+        },
+      ],
+    },
+  ],
+};
+
 export default function Home() {
   return (
-    <main className="relative min-h-screen bg-black text-white selection:bg-white/30 flex flex-col items-center">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
+      <main className="relative min-h-screen bg-black text-white selection:bg-white/30 flex flex-col items-center">
       <div id="asoschi" className="w-full">
         <Hero />
         <AnimatedIntro />
@@ -385,6 +527,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-    </main>
+      </main>
+    </>
   );
 }
