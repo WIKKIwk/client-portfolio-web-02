@@ -11,7 +11,9 @@ import Image from "next/image";
 import { Poppins } from "next/font/google";
 import {
   contactPhones,
+  portfolioProjects,
   seoKeywords,
+  serviceOffers,
   siteDescription,
   siteName,
   siteTitle,
@@ -48,6 +50,14 @@ const jsonLd = {
       about: {
         "@id": `${siteUrl}/#business`,
       },
+      mainEntity: [
+        {
+          "@id": `${siteUrl}/#service-catalog`,
+        },
+        {
+          "@id": `${siteUrl}/#portfolio-list`,
+        },
+      ],
       primaryImageOfPage: {
         "@id": `${siteUrl}/#hero-image`,
       },
@@ -69,6 +79,8 @@ const jsonLd = {
       image: `${siteUrl}/logo.svg`,
       logo: `${siteUrl}/logo.svg`,
       description: siteDescription,
+      slogan: "Dizayn orqali qadriyatni qadoqlayman.",
+      priceRange: "$$",
       founder: {
         "@id": `${siteUrl}/#islombek-botirov`,
       },
@@ -90,28 +102,62 @@ const jsonLd = {
         },
       ],
       sameAs: [telegramUrl],
-      makesOffer: [
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Qadoq dizayn va package design",
-            serviceType: "Packaging design",
-            description:
-              "Brend xarakteriga mos professional qadoqlash dizayni, premium packaging, rebranding, mockup va poligrafik dizayn.",
+      knowsAbout: seoKeywords,
+      hasOfferCatalog: {
+        "@id": `${siteUrl}/#service-catalog`,
+      },
+      makesOffer: serviceOffers.map((service) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          ...service,
+          provider: {
+            "@id": `${siteUrl}/#business`,
           },
         },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Mahsulot uchun vizual identitet",
-            serviceType: "Brand identity for packaged products",
-            description:
-              "Mahsulot polkada ajralib turishi va xaridor esida qolishi uchun sotuvga yo'naltirilgan vizual konsepsiya.",
+      })),
+    },
+    {
+      "@type": "OfferCatalog",
+      "@id": `${siteUrl}/#service-catalog`,
+      name: "Qadoq dizayn va package design xizmatlari",
+      itemListElement: serviceOffers.map((service, index) => ({
+        "@type": "Offer",
+        position: index + 1,
+        itemOffered: {
+          "@type": "Service",
+          "@id": `${siteUrl}/#service-${index + 1}`,
+          ...service,
+          provider: {
+            "@id": `${siteUrl}/#business`,
+          },
+          areaServed: {
+            "@type": "Country",
+            name: "Uzbekistan",
           },
         },
-      ],
+      })),
+    },
+    {
+      "@type": "ItemList",
+      "@id": `${siteUrl}/#portfolio-list`,
+      name: "Qadoq dizayn portfolio",
+      description:
+        "Qadoqdizayn.uz portfolio bo'limidagi package design va qadoq dizayn ishlari.",
+      itemListElement: portfolioProjects.map((project, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "CreativeWork",
+          "@id": `${siteUrl}/#${project.id}`,
+          name: project.name,
+          image: project.image,
+          creator: {
+            "@id": `${siteUrl}/#islombek-botirov`,
+          },
+          about: ["Qadoq dizayn", "Package design", "Packaging design"],
+        },
+      })),
     },
     {
       "@type": "Person",

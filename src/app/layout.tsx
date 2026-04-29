@@ -31,6 +31,8 @@ export const metadata: Metadata = {
   publisher: siteName,
   keywords: seoKeywords,
   category: "Packaging Design",
+  referrer: "origin-when-cross-origin",
+  manifest: "/manifest.webmanifest",
   alternates: {
     canonical: "/",
     languages: {
@@ -74,6 +76,25 @@ export const metadata: Metadata = {
   icons: {
     icon: "/icon.svg",
     shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
+  appleWebApp: {
+    capable: true,
+    title: siteName,
+    statusBarStyle: "black-translucent",
+  },
+  formatDetection: {
+    telephone: true,
+    address: false,
+    email: false,
+  },
+  other: {
+    "geo.region": "UZ",
+    "geo.placename": "Toshkent, Uzbekistan",
+    classification: "Packaging design, qadoq dizayn, package design",
+    "business:contact_data:country_name": "Uzbekistan",
+    "business:contact_data:phone_number": "+998913514261",
+    "article:author": "Islombek Botirov",
   },
 };
 

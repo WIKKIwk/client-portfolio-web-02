@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { siteUrl } from "@/lib/seo";
+import { sitemapImages, siteUrl } from "@/lib/seo";
 
 export const dynamic = "force-static";
 
@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date("2026-04-29"),
       changeFrequency: "weekly",
       priority: 1,
+      images: sitemapImages,
     },
   ];
 }

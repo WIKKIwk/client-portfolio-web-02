@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, type KeyboardEvent as ReactKeyboardEvent } from "react";
 import Image from "next/image";
 import data from "@/lib/portfolioData.json";
+import { portfolioProjects } from "@/lib/seo";
 import FadeInItem from "@/components/FadeInItem";
 
 type PortfolioData = Record<string, string[]>;
@@ -24,6 +25,13 @@ export default function PortfolioGrid() {
     setImages(allImages);
     setCurrentIndex(0);
     setOpen(true);
+  };
+
+  const handleCardKeyDown = (event: ReactKeyboardEvent<HTMLDivElement>, num: number) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      openLightbox(num);
+    }
   };
 
   const closeLightbox = useCallback(() => {
@@ -73,6 +81,10 @@ export default function PortfolioGrid() {
           <FadeInItem key={num} delay={num * 0.1}>
             <div
               onClick={() => openLightbox(num)}
+              onKeyDown={(event) => handleCardKeyDown(event, num)}
+              role="button"
+              tabIndex={0}
+              aria-label={`${portfolioProjects[num - 1]?.name || `Qadoq dizayn portfolio loyihasi ${num}`} rasmlarini ochish`}
               className="relative aspect-[4/5] w-full group cursor-pointer z-10 hover:z-50 transition-all duration-500"
             >
               {/* Glow effet */}
@@ -89,7 +101,7 @@ export default function PortfolioGrid() {
               <div className="absolute inset-0 overflow-hidden rounded-sm shadow-[0_0_40px_rgba(0,0,0,0.8)] z-10 border border-white/5 transition-colors duration-[800ms] group-hover:border-white/20 bg-[#000]">
                 <Image
                   src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/porta/${num}.webp`}
-                  alt={`Portfolio Islom Aka ${num}`}
+                  alt={portfolioProjects[num - 1]?.name || `Qadoq dizayn portfolio loyihasi ${num}`}
                   fill
                   quality={90}
                   className="object-cover transition-all duration-[800ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] grayscale group-hover:grayscale-0 group-hover:scale-105"
