@@ -9,6 +9,7 @@ import AnimatedCounter from "@/components/AnimatedCounter";
 import LightRays from "@/components/LightRays";
 import Image from "next/image";
 import { Poppins } from "next/font/google";
+import { getAkaGalleryGroups } from "@/lib/akaGallery";
 import {
   contactPhones,
   portfolioProjects,
@@ -194,7 +195,9 @@ const jsonLd = {
   ],
 };
 
-export default function Home() {
+export default async function Home() {
+  const akaGroups = await getAkaGalleryGroups();
+
   return (
     <>
       <script
@@ -287,7 +290,7 @@ export default function Home() {
         </div>
 
         {/* Portfolio Rasmlari Gird'i */}
-        <PortfolioGrid />
+        <PortfolioGrid akaGroups={akaGroups} />
       </div>
 
       {/* Takliflar + Footer wrapper: SVG shu ikki qismni qamrab oladi */}
