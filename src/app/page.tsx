@@ -5,6 +5,7 @@ import FadeInItem from "@/components/FadeInItem";
 import ShinyText from "@/components/ShinyText";
 import BlurText from "@/components/BlurText";
 import PortfolioGrid from "@/components/PortfolioGrid";
+import ScrollToTopButton from "@/components/ScrollToTopButton";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import LightRays from "@/components/LightRays";
 import Image from "next/image";
@@ -576,6 +577,7 @@ export default async function Home() {
           </div>
         </div>
       </div>
+      <ScrollToTopButton />
       </main>
     </>
   );

@@ -140,16 +140,6 @@ export default function PortfolioGrid({ akaGroups }: PortfolioGridProps) {
         id="portfolio"
         className="w-full max-w-[1920px] px-6 md:px-12 lg:px-24 pt-4 md:pt-8 pb-12 md:pb-16 relative z-10"
       >
-        <div className="flex items-center justify-between gap-4 mb-6 md:mb-8">
-          <div className="text-xs md:text-sm tracking-[0.35em] text-gray-500 uppercase select-none">
-            {galleryItems.length} ish
-          </div>
-
-          <div className="min-w-20 text-center text-xs md:text-sm tracking-[0.3em] text-gray-400 select-none">
-            {safeStartIndex + 1}-{Math.min(safeStartIndex + ITEMS_VISIBLE, galleryItems.length)} / {galleryItems.length}
-          </div>
-        </div>
-
         <div className="relative">
           {galleryItems.length > ITEMS_VISIBLE && (
             <>
