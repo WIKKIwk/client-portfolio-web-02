@@ -295,7 +295,7 @@ export default async function Home() {
       </div>
 
       {/* Takliflar + Footer wrapper: SVG shu ikki qismni qamrab oladi */}
-      <div className="relative w-full">
+      <div className="theme-offers-section relative w-full">
         {/* Chap tomondagi vertikal chiziq — takliflardan logoga qadar */}
         <div className="theme-vertical-lines-top-wrap absolute left-[1%] md:left-[3%] lg:left-[4%] top-[150px] md:top-[180px] lg:top-[200px] bottom-[140px] md:bottom-[180px] lg:bottom-[200px] w-[120px] md:w-[180px] lg:w-[220px] opacity-60 pointer-events-none z-[30] hidden md:block">
           <Image

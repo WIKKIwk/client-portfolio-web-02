@@ -308,8 +308,12 @@ html[data-theme="night"] .theme-light-strip {
 }
 
 html[data-theme="day"] .theme-light-panel {
-  background-color: oklch(0.955 0.004 95) !important;
+  background-color: transparent !important;
   color: oklch(0.14 0 0) !important;
+}
+
+html[data-theme="day"] .theme-offers-section {
+  background-color: oklch(0.955 0.004 95) !important;
 }
 
 html[data-theme="day"] .theme-offers-title {
@@ -334,6 +338,11 @@ html[data-theme="day"] .theme-light-intro {
 html[data-theme="night"] .theme-light-panel {
   background-color: #000 !important;
   color: oklch(0.82 0 0) !important;
+}
+
+html[data-theme="night"] .theme-offers-section,
+html.dark .theme-offers-section {
+  background-color: #000 !important;
 }
 
 html.dark .theme-light-panel {
