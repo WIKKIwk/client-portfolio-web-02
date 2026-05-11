@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import DisableDevTools from "@/components/DisableDevTools";
 import MobileWarning from "@/components/MobileWarning";
@@ -109,8 +110,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="uz" suppressHydrationWarning>
+    <html lang="uz" suppressHydrationWarning className="dark" data-theme="night">
       <body className={`${poppins.variable} antialiased font-sans`}>
+        <Script id="theme-init" strategy="beforeInteractive">{`
+          (function () {
+            try {
+              var stored = localStorage.getItem("qadoq-theme");
+              var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+              var theme = stored || (prefersDark ? "night" : "day");
+              document.documentElement.dataset.theme = theme;
+              document.documentElement.classList.toggle("dark", theme === "night");
+              document.documentElement.style.colorScheme = theme === "night" ? "dark" : "light";
+            } catch (e) {}
+          })();
+        `}</Script>
         <DisableDevTools />
         <MobileWarning />
         {children}

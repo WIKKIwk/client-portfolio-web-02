@@ -11,7 +11,7 @@
   aspect-ratio: 100 / 12;
   overflow: visible;
   display: block;
-  fill: #ffffff;
+  fill: currentColor;
   user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;

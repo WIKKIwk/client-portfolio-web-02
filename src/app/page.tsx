@@ -207,13 +207,14 @@ export default async function Home() {
           __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
         }}
       />
+      <ScrollToTopButton />
       <main className="relative min-h-screen bg-black text-white selection:bg-white/30 flex flex-col items-center">
       <div id="asoschi" className="w-full">
         <Hero />
         <AnimatedIntro />
       </div>
 
-      <div className="relative w-full bg-black min-h-[80vh] md:min-h-[100vh] flex flex-col items-center justify-start overflow-hidden pt-0 md:pt-4">
+      <div className="theme-light-strip relative w-full bg-black min-h-[80vh] md:min-h-[100vh] flex flex-col items-center justify-start overflow-hidden pt-0 md:pt-4">
         {/* Yuqori qismdagi CurvedLoop */}
         <div
           className="w-full relative h-[120px] md:h-[200px] pointer-events-auto -mt-8 md:-mt-12"
@@ -227,7 +228,7 @@ export default async function Home() {
             speed={0.6}
             curveAmount={0}
             pathY={93}
-            className="text-2xl md:text-3xl lg:text-4xl font-serif font-medium tracking-[0.15em] fill-gray-200"
+            className="text-2xl md:text-3xl lg:text-4xl font-serif font-medium tracking-[0.15em] fill-current"
           />
         </div>
 
@@ -270,15 +271,15 @@ export default async function Home() {
 
                 {/* O'ng tomon: Katta Statistika */}
                 <div className={`flex flex-col items-center shrink-0 border-l-0 xl:border-l border-white/10 pl-0 xl:pl-16 pb-8 xl:pb-0 ${poppinsFont.className}`}>
-                  <div className="flex flex-col items-center text-center mb-10 xl:mb-16">
-                    <span className="text-4xl md:text-5xl lg:text-6xl text-white font-bold tracking-wider mb-2 flex items-center justify-center">
+                  <div className="theme-stat-block flex flex-col items-center text-center mb-10 xl:mb-16">
+                    <span className="theme-stat-number text-4xl md:text-5xl lg:text-6xl text-white font-bold tracking-wider mb-2 flex items-center justify-center">
                       <AnimatedCounter targetValue={100} fontSize={60} places={[100, 10, 1]} fontWeight="700" />
                       <span className="ml-1 md:ml-2">+</span>
                     </span>
                     <span className={`text-xs md:text-sm text-gray-500 tracking-[0.2em] ${poppinsFont.className}`}>Muvaffaqiyatli loyihalar</span>
                   </div>
-                  <div className="flex flex-col items-center text-center">
-                    <span className="text-4xl md:text-5xl lg:text-6xl text-white font-bold tracking-wider mb-2 flex items-center justify-center">
+                  <div className="theme-stat-block flex flex-col items-center text-center">
+                    <span className="theme-stat-number text-4xl md:text-5xl lg:text-6xl text-white font-bold tracking-wider mb-2 flex items-center justify-center">
                       <AnimatedCounter targetValue={6} fontSize={60} places={[1]} fontWeight="700" />
                     </span>
                     <span className={`text-xs md:text-sm text-gray-500 tracking-[0.2em] ${poppinsFont.className}`}>Yillik amaliy tajriba</span>
@@ -297,12 +298,12 @@ export default async function Home() {
       {/* Takliflar + Footer wrapper: SVG shu ikki qismni qamrab oladi */}
       <div className="relative w-full">
         {/* Chap tomondagi vertikal chiziq — takliflardan logoga qadar */}
-        <div className="absolute left-[1%] md:left-[3%] lg:left-[4%] top-[150px] md:top-[180px] lg:top-[200px] bottom-0 w-[120px] md:w-[180px] lg:w-[220px] opacity-60 pointer-events-none z-[30] hidden md:block">
+        <div className="absolute left-[1%] md:left-[3%] lg:left-[4%] top-[150px] md:top-[180px] lg:top-[200px] bottom-[140px] md:bottom-[180px] lg:bottom-[200px] w-[120px] md:w-[180px] lg:w-[220px] opacity-60 pointer-events-none z-[30] hidden md:block">
           <Image
             src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/Безымянный-3.svg`}
             alt="Vertical Lines"
             fill
-            className="object-cover object-left-top"
+            className="theme-vertical-lines theme-vertical-lines-top object-cover object-left-top"
           />
         </div>
 
@@ -327,7 +328,7 @@ export default async function Home() {
         </div>
 
         {/* Hizmatlar/Takliflar haqida ma'lumot qismi */}
-        <div id="takliflar" className={`relative w-full max-w-7xl mx-auto py-16 md:py-24 px-6 md:px-12 flex flex-col gap-12 text-gray-300 ${poppinsFont.className}`}>
+        <div id="takliflar" className={`theme-light-panel relative w-full max-w-7xl mx-auto py-16 md:py-24 px-6 md:px-12 flex flex-col gap-12 text-gray-300 ${poppinsFont.className}`}>
           {/* Sarlavha: Takliflar */}
           <div className="w-full text-left pl-0 md:pl-32 lg:pl-40 md:pb-4 border-b border-white/5 pb-6 relative z-[35]">
             <FadeInItem delay={0.1}>
@@ -537,6 +538,16 @@ export default async function Home() {
 
         {/* Eng pastki qism - Kulrang konda (Footer) */}
         <div id="boglanish" className="w-full h-[140px] md:h-[180px] lg:h-[200px] bg-[#1a1a1a] relative z-20 flex items-center justify-center">
+          <div className="absolute left-[1%] md:left-[3%] lg:left-[4%] -top-[140px] md:-top-[180px] lg:-top-[200px] bottom-0 w-[120px] md:w-[180px] lg:w-[220px] pointer-events-none z-[31] hidden md:block">
+            <div className="relative w-full h-full theme-vertical-lines-bottom-wrap">
+              <Image
+                src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/Безымянный-3.svg`}
+                alt="Vertical Lines Bottom"
+                fill
+                className="theme-vertical-lines theme-vertical-lines-bottom object-cover object-left-top"
+              />
+            </div>
+          </div>
 
           {/* Chap tomon: Logo (Absolute holatda) */}
           <div className="absolute left-[18%] md:left-[21%] lg:left-[23%] top-1/2 transform -translate-y-1/2 z-10 hidden md:flex">
@@ -550,7 +561,7 @@ export default async function Home() {
           </div>
 
           {/* O'ng tomon: Kontaktlar */}
-          <div className="flex flex-col items-center justify-center gap-3 md:gap-4 z-10 relative ml-16 md:ml-28 lg:ml-[152px]">
+          <div className="theme-contact-block flex flex-col items-center justify-center gap-3 md:gap-4 z-10 relative ml-16 md:ml-28 lg:ml-[152px]">
             <div className="flex flex-col items-center gap-1 text-white font-medium text-lg md:text-2xl lg:text-4xl tracking-wide font-sans leading-tight">
               <a href="tel:+998913514261" className="hover:text-gray-300 transition-colors inline-block">+99891 351-42-61</a>
               <a href="tel:+998949024261" className="hover:text-gray-300 transition-colors inline-block">+99894 902-42-61</a>
@@ -577,7 +588,6 @@ export default async function Home() {
           </div>
         </div>
       </div>
-      <ScrollToTopButton />
       </main>
     </>
   );

@@ -143,29 +143,37 @@ export default function PortfolioGrid({ akaGroups }: PortfolioGridProps) {
         <div className="relative">
           {galleryItems.length > ITEMS_VISIBLE && (
             <>
-              <button
+              <motion.button
                 type="button"
                 onClick={prevPage}
                 disabled={safeStartIndex === 0}
-                className="absolute -left-6 md:-left-12 lg:-left-20 top-1/2 -translate-y-1/2 z-20 inline-flex items-center justify-center rounded-full border border-white/10 bg-black/75 backdrop-blur-sm p-3 md:p-4 text-gray-200 transition hover:bg-white/12 hover:text-white disabled:opacity-25 disabled:hover:bg-black/75"
+                whileTap={{ scale: 0.92, x: -1 }}
+                initial={false}
+                animate={{ opacity: safeStartIndex === 0 ? 0.35 : 1, scale: 1 }}
+                transition={{ duration: 0.18, ease: "easeOut" }}
+                className="group absolute -left-6 md:-left-12 lg:-left-20 top-1/2 -translate-y-1/2 z-20 inline-flex h-10 w-10 md:h-11 md:w-11 items-center justify-center rounded-full border border-white/10 bg-black/20 text-white shadow-[0_10px_26px_rgba(0,0,0,0.35)] backdrop-blur-2xl transition will-change-transform hover:border-white/20 hover:bg-black/25 hover:shadow-[0_14px_30px_rgba(0,0,0,0.42)] disabled:cursor-not-allowed disabled:hover:bg-black/20 disabled:hover:border-white/10"
                 aria-label="Oldingi 2 ta ish"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-5 w-5 md:h-6 md:w-6">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="relative z-10 h-4 w-4 md:h-[18px] md:w-[18px]">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                 </svg>
-              </button>
+              </motion.button>
 
-              <button
+              <motion.button
                 type="button"
                 onClick={nextPage}
                 disabled={safeStartIndex >= maxStartIndex}
-                className="absolute -right-6 md:-right-12 lg:-right-20 top-1/2 -translate-y-1/2 z-20 inline-flex items-center justify-center rounded-full border border-white/10 bg-black/75 backdrop-blur-sm p-3 md:p-4 text-gray-200 transition hover:bg-white/12 hover:text-white disabled:opacity-25 disabled:hover:bg-black/75"
+                whileTap={{ scale: 0.92, x: 1 }}
+                initial={false}
+                animate={{ opacity: safeStartIndex >= maxStartIndex ? 0.35 : 1, scale: 1 }}
+                transition={{ duration: 0.18, ease: "easeOut" }}
+                className="group absolute -right-6 md:-right-12 lg:-right-20 top-1/2 -translate-y-1/2 z-20 inline-flex h-10 w-10 md:h-11 md:w-11 items-center justify-center rounded-full border border-white/10 bg-black/20 text-white shadow-[0_10px_26px_rgba(0,0,0,0.35)] backdrop-blur-2xl transition will-change-transform hover:border-white/20 hover:bg-black/25 hover:shadow-[0_14px_30px_rgba(0,0,0,0.42)] disabled:cursor-not-allowed disabled:hover:bg-black/20 disabled:hover:border-white/10"
                 aria-label="Keyingi 2 ta ish"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-5 w-5 md:h-6 md:w-6">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="relative z-10 h-4 w-4 md:h-[18px] md:w-[18px]">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                 </svg>
-              </button>
+              </motion.button>
             </>
           )}
 

@@ -35,7 +35,7 @@ export default function AnimatedIntro() {
     }, []);
 
     return (
-        <div className="w-full bg-[#242424] flex items-start justify-center overflow-hidden relative">
+        <div className="theme-light-intro w-full bg-[#242424] flex items-start justify-center overflow-hidden relative">
             <div className={`relative w-full max-w-[1920px] pl-4 md:pl-10 lg:pl-[70px] xl:pl-[134px] 2xl:pl-[182px] pr-4 md:pr-12 lg:pr-24 xl:pr-40 2xl:pr-56 py-4 md:py-8 text-white flex flex-row items-center justify-between gap-6 ${poppinsFont.className}`}>
 
                 {/* Left Text side */}
@@ -66,7 +66,7 @@ export default function AnimatedIntro() {
                             alt="Qo'l rasmi"
                             width={220}
                             height={220}
-                            className="w-full max-w-[100px] lg:max-w-[160px] xl:max-w-[220px] h-auto object-contain drop-shadow-2xl opacity-40 lg:opacity-100"
+                            className="theme-signature-svg w-full max-w-[100px] lg:max-w-[160px] xl:max-w-[220px] h-auto object-contain drop-shadow-2xl opacity-40 lg:opacity-100"
                         />
                     )}
                 </div>

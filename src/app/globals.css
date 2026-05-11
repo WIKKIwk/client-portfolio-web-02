@@ -212,3 +212,215 @@ a {
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
 }
+
+html[data-theme="day"] body {
+  color: var(--foreground);
+  background: var(--background);
+}
+
+html[data-theme="day"] .bg-black {
+  background-color: oklch(0.98 0 0) !important;
+}
+
+html[data-theme="day"] [class*="bg-black/"] {
+  background-color: oklch(0.98 0 0 / 0.72) !important;
+}
+
+html[data-theme="day"] .bg-black\/20,
+html[data-theme="day"] .bg-black\/25,
+html[data-theme="day"] .bg-black\/75,
+html[data-theme="day"] .bg-black\/92 {
+  background-color: oklch(0.98 0 0 / 0.72) !important;
+}
+
+html[data-theme="day"] .text-white {
+  color: oklch(0.16 0 0) !important;
+}
+
+html[data-theme="day"] .text-gray-200 {
+  color: oklch(0.3 0 0) !important;
+}
+
+html[data-theme="day"] .text-gray-300 {
+  color: oklch(0.42 0 0) !important;
+}
+
+html[data-theme="day"] .text-gray-400 {
+  color: oklch(0.52 0 0) !important;
+}
+
+html[data-theme="day"] .text-gray-500 {
+  color: oklch(0.62 0 0) !important;
+}
+
+html[data-theme="day"] [class*="border-white/"] {
+  border-color: oklch(0.18 0 0 / 0.14) !important;
+}
+
+html[data-theme="day"] [class*="bg-white/"] {
+  background-color: oklch(0.18 0 0 / 0.05) !important;
+}
+
+html[data-theme="day"] .theme-lock-dark {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+html[data-theme="day"] .theme-lock-dark .text-white,
+html[data-theme="day"] .theme-lock-dark .text-gray-200,
+html[data-theme="day"] .theme-lock-dark .text-gray-300,
+html[data-theme="day"] .theme-lock-dark .text-gray-400,
+html[data-theme="day"] .theme-lock-dark .text-gray-500 {
+  color: inherit !important;
+}
+
+html[data-theme="day"] .theme-lock-dark .bg-black,
+html[data-theme="day"] .theme-lock-dark [class*="bg-black/"] {
+  background-color: #000 !important;
+}
+
+html[data-theme="day"] .theme-lock-dark [class*="border-white/"] {
+  border-color: oklch(1 0 0 / 0.1) !important;
+}
+
+html[data-theme="day"] .theme-light-strip {
+  background-color: oklch(0.94 0.005 95) !important;
+  color: oklch(0.16 0 0) !important;
+}
+
+html[data-theme="night"] .theme-light-strip {
+  background-color: #000 !important;
+  color: oklch(0.9 0 0) !important;
+}
+
+html[data-theme="day"] .theme-light-panel {
+  background-color: oklch(0.955 0.004 95) !important;
+  color: oklch(0.14 0 0) !important;
+}
+
+html[data-theme="day"] .theme-light-intro {
+  background-color: oklch(0.955 0.004 95) !important;
+  color: oklch(0.14 0 0) !important;
+}
+
+html[data-theme="night"] .theme-light-panel {
+  background-color: #fff !important;
+  color: oklch(0.2 0 0) !important;
+}
+
+html[data-theme="night"] .theme-light-intro {
+  background-color: #242424 !important;
+  color: oklch(0.985 0 0) !important;
+}
+
+html[data-theme="day"] .theme-light-strip .curved-loop-svg,
+html[data-theme="day"] .theme-light-intro .text-white,
+html[data-theme="day"] .theme-light-intro .text-white\/70,
+html[data-theme="day"] .theme-light-intro .text-gray-200,
+html[data-theme="day"] .theme-light-intro .text-gray-300,
+html[data-theme="day"] .theme-light-intro .text-gray-400,
+html[data-theme="day"] .theme-light-intro .text-gray-500,
+html[data-theme="day"] .theme-light-panel .text-white,
+html[data-theme="day"] .theme-light-panel .text-gray-200,
+html[data-theme="day"] .theme-light-panel .text-gray-300,
+html[data-theme="day"] .theme-light-panel .text-gray-400,
+html[data-theme="day"] .theme-light-panel .text-gray-500 {
+  color: oklch(0.14 0 0) !important;
+  fill: currentColor !important;
+}
+
+html[data-theme="day"] .theme-light-panel .border-white\/5,
+html[data-theme="day"] .theme-light-panel .border-white\/10 {
+  border-color: oklch(0.2 0 0 / 0.12) !important;
+}
+
+html[data-theme="day"] .theme-light-intro .text-white\/70 {
+  color: oklch(0.32 0 0) !important;
+}
+
+html[data-theme="day"] .theme-signature-svg {
+  filter: brightness(0) saturate(100%) !important;
+}
+
+html[data-theme="night"] .theme-signature-svg {
+  filter: none !important;
+}
+
+html[data-theme="day"] .theme-vertical-lines {
+  filter: brightness(0) saturate(100%) !important;
+}
+
+html[data-theme="night"] .theme-vertical-lines {
+  filter: none !important;
+}
+
+html[data-theme="day"] .theme-vertical-lines-top {
+  mask-image: linear-gradient(to bottom, black 0%, black 82%, transparent 100%) !important;
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 82%, transparent 100%) !important;
+}
+
+html[data-theme="day"] .theme-vertical-lines-bottom {
+  filter: brightness(0) saturate(100%) !important;
+  mask-image: linear-gradient(to bottom, transparent 0%, black 14%, black 100%) !important;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 14%, black 100%) !important;
+}
+
+html[data-theme="night"] .theme-vertical-lines-top,
+html[data-theme="night"] .theme-vertical-lines-bottom {
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+}
+
+html[data-theme="day"] .theme-vertical-lines-bottom-wrap {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+html[data-theme="day"] .theme-vertical-lines-bottom-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.85) 18%, rgba(255, 255, 255, 0) 35%);
+  pointer-events: none;
+}
+
+html[data-theme="day"] .theme-stat-block .theme-stat-number,
+html[data-theme="day"] .theme-stat-block .theme-stat-number span {
+  color: oklch(0.12 0 0) !important;
+}
+
+html[data-theme="day"] .theme-stat-block .theme-stat-number {
+  text-shadow: none !important;
+}
+
+html[data-theme="day"] .theme-contact-block .text-white,
+html[data-theme="day"] .theme-contact-block .hover\:text-gray-300:hover,
+html[data-theme="day"] .theme-contact-block .hover\:text-white:hover {
+  color: #fff !important;
+}
+
+html[data-theme="night"] .theme-icon-day {
+  opacity: 1;
+  transform: scale(1);
+}
+
+html[data-theme="night"] .theme-icon-night {
+  opacity: 0;
+  transform: scale(0.82);
+}
+
+html[data-theme="day"] .theme-icon-day {
+  opacity: 0;
+  transform: scale(0.82);
+}
+
+html[data-theme="day"] .theme-icon-night {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.theme-icon-day,
+.theme-icon-night {
+  transition: opacity 220ms ease, transform 220ms ease;
+}

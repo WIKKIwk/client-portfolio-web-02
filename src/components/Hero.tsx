@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Poppins } from "next/font/google";
 import BlurText from "@/components/BlurText";
 import ShinyText from "@/components/ShinyText";
+import ThemeToggleButton from "@/components/ThemeToggleButton";
 import { useEffect, useState } from "react";
 
 const poppinsFont = Poppins({ subsets: ['latin'], weight: ['300', '400', '500', '600', '700'] });
@@ -43,7 +44,7 @@ export default function Hero() {
     }, []);
 
     return (
-        <section className="relative w-full overflow-hidden bg-black flex flex-col items-center justify-center">
+        <section className="theme-lock-dark relative w-full overflow-hidden bg-black flex flex-col items-center justify-center">
             <h1 className="sr-only">
                 Qadoq dizayn va package design xizmatlari - Qadoqdizayn.uz
             </h1>
@@ -71,6 +72,7 @@ export default function Hero() {
                 <a href="#boglanish" className="transition-transform duration-300 hover:scale-110 active:scale-95">
                     <ShinyText text="Bog'lanish" speed={shineDurationMs / 1000} disabled={!actives[3]} color="#9ca3af" shineColor="#ffffff" />
                 </a>
+                <ThemeToggleButton placement="inline" className="self-start mt-[-6px] mix-blend-normal" />
             </nav>
             <Image
                 src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/gogo.webp`}
