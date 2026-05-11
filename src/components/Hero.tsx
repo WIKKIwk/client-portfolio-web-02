@@ -81,7 +81,7 @@ export default function Hero() {
                     width={7996}
                     height={4496}
                     priority
-                    className="theme-hero-image-night w-full h-auto brightness-75 transition-opacity duration-500"
+                    className="theme-hero-image-night w-full h-auto brightness-75"
                 />
                 <Image
                     src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/kunduz.webp`}
@@ -89,7 +89,7 @@ export default function Hero() {
                     fill
                     priority
                     aria-hidden="true"
-                    className="theme-hero-image-day absolute inset-0 object-cover brightness-75 opacity-0 transition-opacity duration-500"
+                    className="theme-hero-image-day absolute inset-0 object-cover brightness-75 opacity-0"
                 />
             </div>
 
