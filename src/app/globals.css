@@ -285,8 +285,8 @@ html[data-theme="day"] .theme-lock-dark [class*="border-white/"] {
 
 html[data-theme="day"] .theme-hero-image-day {
   opacity: 1 !important;
-  animation: heroBlinkReveal 360ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
-  will-change: clip-path, opacity;
+  animation: heroMotionBlurIn 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: filter, transform, opacity;
 }
 
 html[data-theme="night"] .theme-hero-image-night,
@@ -300,20 +300,23 @@ html.dark .theme-hero-image-day {
   animation: none;
 }
 
-@keyframes heroBlinkReveal {
+@keyframes heroMotionBlurIn {
   0% {
-    clip-path: inset(48% 0 48% 0);
-    opacity: 0.92;
+    filter: blur(18px) brightness(0.75);
+    opacity: 0;
+    transform: scale(1.015);
   }
 
-  45% {
-    clip-path: inset(42% 0 42% 0);
+  55% {
+    filter: blur(7px) brightness(0.75);
     opacity: 1;
+    transform: scale(1.006);
   }
 
   100% {
-    clip-path: inset(0 0 0 0);
+    filter: blur(0) brightness(0.75);
     opacity: 1;
+    transform: scale(1);
   }
 }
 
