@@ -285,8 +285,6 @@ html[data-theme="day"] .theme-lock-dark [class*="border-white/"] {
 
 html[data-theme="day"] .theme-hero-image-day {
   opacity: 1 !important;
-  animation: heroBlinkReveal 360ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
-  will-change: clip-path, opacity;
 }
 
 html[data-theme="night"] .theme-hero-image-night,
@@ -297,24 +295,6 @@ html.dark .theme-hero-image-night {
 html[data-theme="night"] .theme-hero-image-day,
 html.dark .theme-hero-image-day {
   opacity: 0 !important;
-  animation: none;
-}
-
-@keyframes heroBlinkReveal {
-  0% {
-    clip-path: inset(48% 0 48% 0);
-    opacity: 0.92;
-  }
-
-  45% {
-    clip-path: inset(42% 0 42% 0);
-    opacity: 1;
-  }
-
-  100% {
-    clip-path: inset(0 0 0 0);
-    opacity: 1;
-  }
 }
 
 html[data-theme="day"] .theme-light-strip {
