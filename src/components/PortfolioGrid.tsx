@@ -207,7 +207,7 @@ export default function PortfolioGrid({ akaGroups }: PortfolioGridProps) {
                       />
                     </div>
 
-                    <div className="absolute inset-0 overflow-hidden rounded-sm shadow-[0_0_40px_rgba(0,0,0,0.8)] z-10 border border-white/5 transition-colors duration-[800ms] group-hover:border-white/20 bg-[#000]">
+                    <div className="theme-portfolio-card absolute inset-0 overflow-hidden rounded-sm shadow-[0_0_40px_rgba(0,0,0,0.8)] z-10 border border-white/5 transition-colors duration-[800ms] group-hover:border-white/20 bg-[#000]">
                       <Image
                         src={item.cover}
                         alt={item.title}

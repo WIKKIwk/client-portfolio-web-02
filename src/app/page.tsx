@@ -2,7 +2,6 @@ import Hero from "@/components/Hero";
 import AnimatedIntro from "@/components/AnimatedIntro";
 import CurvedLoop from "@/components/CurvedLoop";
 import FadeInItem from "@/components/FadeInItem";
-import ShinyText from "@/components/ShinyText";
 import BlurText from "@/components/BlurText";
 import PortfolioGrid from "@/components/PortfolioGrid";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
@@ -332,13 +331,8 @@ export default async function Home() {
           {/* Sarlavha: Takliflar */}
           <div className="w-full text-left pl-0 md:pl-32 lg:pl-40 md:pb-4 border-b border-white/5 pb-6 relative z-[35]">
             <FadeInItem delay={0.1}>
-              <h2 className="text-3xl md:text-5xl font-semibold tracking-[0.1em] text-white">
-                <ShinyText
-                  text="TAKLIFLAR"
-                  disabled={false}
-                  speed={3}
-                  className="shiny-text uppercase"
-                />
+              <h2 className="theme-offers-title text-3xl md:text-5xl font-semibold tracking-[0.1em] text-white">
+                TAKLIFLAR
               </h2>
             </FadeInItem>
           </div>
