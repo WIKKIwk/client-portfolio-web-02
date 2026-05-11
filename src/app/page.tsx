@@ -430,7 +430,7 @@ export default async function Home() {
                     className="text-xl md:text-2xl text-white font-medium inline-block"
                   />
                   <BlurText
-                    text="Na faqat dizayn, balki qadoq shakli, o'lcham variantlari hamda fotorealistik 3D mockup yaratish."
+                    text="Nafaqat dizayn, balki qadoq shakli, o'lcham variantlari hamda fotorealistik 3D mockup yaratish."
                     delay={10}
                     animateBy="words"
                     direction="top"
