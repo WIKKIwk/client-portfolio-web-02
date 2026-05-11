@@ -538,15 +538,13 @@ export default async function Home() {
 
         {/* Eng pastki qism - Kulrang konda (Footer) */}
         <div id="boglanish" className="w-full h-[140px] md:h-[180px] lg:h-[200px] bg-[#1a1a1a] relative z-20 flex items-center justify-center">
-          <div className="absolute left-[1%] md:left-[3%] lg:left-[4%] -top-[140px] md:-top-[180px] lg:-top-[200px] bottom-0 w-[120px] md:w-[180px] lg:w-[220px] pointer-events-none z-[31] hidden md:block">
-            <div className="relative w-full h-full theme-vertical-lines-bottom-wrap">
-              <Image
-                src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/Безымянный-3.svg`}
-                alt="Vertical Lines Bottom"
-                fill
-                className="theme-vertical-lines theme-vertical-lines-bottom object-cover object-left-top"
-              />
-            </div>
+          <div className="absolute left-[1%] md:left-[3%] lg:left-[4%] top-0 bottom-0 w-[120px] md:w-[180px] lg:w-[220px] opacity-70 pointer-events-none z-[31] hidden md:block">
+            <Image
+              src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/Безымянный-3.svg`}
+              alt="Vertical Lines Bottom"
+              fill
+              className="theme-vertical-lines-bottom object-cover object-left-top"
+            />
           </div>
 
           {/* Chap tomon: Logo (Absolute holatda) */}

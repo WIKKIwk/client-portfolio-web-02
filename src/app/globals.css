@@ -355,34 +355,16 @@ html[data-theme="night"] .theme-vertical-lines {
 }
 
 html[data-theme="day"] .theme-vertical-lines-top {
-  mask-image: linear-gradient(to bottom, black 0%, black 82%, transparent 100%) !important;
-  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 82%, transparent 100%) !important;
+  filter: brightness(0) saturate(100%) !important;
 }
 
 html[data-theme="day"] .theme-vertical-lines-bottom {
-  filter: brightness(0) saturate(100%) !important;
-  mask-image: linear-gradient(to bottom, transparent 0%, black 14%, black 100%) !important;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 14%, black 100%) !important;
+  filter: brightness(0) invert(1) !important;
 }
 
 html[data-theme="night"] .theme-vertical-lines-top,
 html[data-theme="night"] .theme-vertical-lines-bottom {
-  mask-image: none !important;
-  -webkit-mask-image: none !important;
-}
-
-html[data-theme="day"] .theme-vertical-lines-bottom-wrap {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-html[data-theme="day"] .theme-vertical-lines-bottom-wrap::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.85) 18%, rgba(255, 255, 255, 0) 35%);
-  pointer-events: none;
+  filter: none !important;
 }
 
 html[data-theme="day"] .theme-stat-block .theme-stat-number,
