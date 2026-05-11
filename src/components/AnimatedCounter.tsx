@@ -28,7 +28,14 @@ export default function AnimatedCounter({ targetValue, fontSize = 60, places, fo
 
   return (
     <div ref={ref} className="flex items-center">
-      <Counter value={value} fontSize={fontSize} places={places} textColor="white" fontWeight={fontWeight} />
+      <Counter
+        value={value}
+        fontSize={fontSize}
+        places={places}
+        textColor="white"
+        fontWeight={fontWeight}
+        gradientHeight={0}
+      />
     </div>
   );
 }
