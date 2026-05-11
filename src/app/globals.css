@@ -308,6 +308,23 @@ html[data-theme="night"] .theme-light-panel {
   color: oklch(0.82 0 0) !important;
 }
 
+html.dark .theme-light-panel {
+  background-color: #000 !important;
+  color: oklch(0.82 0 0) !important;
+}
+
+html.dark .theme-light-panel .text-white {
+  color: #fff !important;
+}
+
+html.dark .theme-light-panel .text-gray-300 {
+  color: rgb(209 213 219) !important;
+}
+
+html.dark .theme-light-panel .border-white\/5 {
+  border-color: rgb(255 255 255 / 0.05) !important;
+}
+
 html[data-theme="night"] .theme-light-intro {
   background-color: #242424 !important;
   color: oklch(0.985 0 0) !important;
