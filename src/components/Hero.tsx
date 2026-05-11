@@ -74,14 +74,24 @@ export default function Hero() {
                 </a>
                 <ThemeToggleButton placement="inline" className="self-start mt-[-6px] mix-blend-normal" />
             </nav>
-            <Image
-                src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/gogo.webp`}
-                alt="Islombek Botirov qadoq dizayn va package design portfolio rasmi"
-                width={7996}
-                height={4496}
-                priority
-                className="w-full h-auto brightness-75"
-            />
+            <div className="relative w-full">
+                <Image
+                    src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/gogo.webp`}
+                    alt="Islombek Botirov qadoq dizayn va package design portfolio rasmi"
+                    width={7996}
+                    height={4496}
+                    priority
+                    className="theme-hero-image-night w-full h-auto brightness-75 transition-opacity duration-500"
+                />
+                <Image
+                    src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/kunduz.webp`}
+                    alt=""
+                    fill
+                    priority
+                    aria-hidden="true"
+                    className="theme-hero-image-day absolute inset-0 object-cover brightness-75 opacity-0 transition-opacity duration-500"
+                />
+            </div>
 
             {/* LightRays – vaqtincha o'chirilgan
             <div className="absolute inset-0 z-[5] pointer-events-none">

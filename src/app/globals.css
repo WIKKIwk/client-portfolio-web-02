@@ -283,6 +283,24 @@ html[data-theme="day"] .theme-lock-dark [class*="border-white/"] {
   border-color: oklch(1 0 0 / 0.1) !important;
 }
 
+html[data-theme="day"] .theme-hero-image-night {
+  opacity: 0 !important;
+}
+
+html[data-theme="day"] .theme-hero-image-day {
+  opacity: 1 !important;
+}
+
+html[data-theme="night"] .theme-hero-image-night,
+html.dark .theme-hero-image-night {
+  opacity: 1 !important;
+}
+
+html[data-theme="night"] .theme-hero-image-day,
+html.dark .theme-hero-image-day {
+  opacity: 0 !important;
+}
+
 html[data-theme="day"] .theme-light-strip {
   background-color: oklch(0.94 0.005 95) !important;
   color: oklch(0.16 0 0) !important;
