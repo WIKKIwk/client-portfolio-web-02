@@ -304,8 +304,8 @@ html[data-theme="day"] .theme-light-intro {
 }
 
 html[data-theme="night"] .theme-light-panel {
-  background-color: #fff !important;
-  color: oklch(0.2 0 0) !important;
+  background-color: #000 !important;
+  color: oklch(0.82 0 0) !important;
 }
 
 html[data-theme="night"] .theme-light-intro {
