@@ -355,11 +355,16 @@ html[data-theme="night"] .theme-vertical-lines {
 }
 
 html[data-theme="day"] .theme-vertical-lines-top {
-  filter: brightness(0) saturate(100%) !important;
+  filter: grayscale(1) brightness(0) contrast(1000%) !important;
 }
 
 html[data-theme="day"] .theme-vertical-lines-bottom {
-  filter: brightness(0) invert(1) !important;
+  filter: grayscale(1) brightness(0) invert(1) contrast(1000%) !important;
+}
+
+html[data-theme="day"] .theme-vertical-lines-top-wrap,
+html[data-theme="day"] .theme-vertical-lines-bottom-wrap {
+  opacity: 1 !important;
 }
 
 html[data-theme="night"] .theme-vertical-lines-top,

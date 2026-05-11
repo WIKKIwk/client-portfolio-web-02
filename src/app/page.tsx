@@ -298,7 +298,7 @@ export default async function Home() {
       {/* Takliflar + Footer wrapper: SVG shu ikki qismni qamrab oladi */}
       <div className="relative w-full">
         {/* Chap tomondagi vertikal chiziq — takliflardan logoga qadar */}
-        <div className="absolute left-[1%] md:left-[3%] lg:left-[4%] top-[150px] md:top-[180px] lg:top-[200px] bottom-[140px] md:bottom-[180px] lg:bottom-[200px] w-[120px] md:w-[180px] lg:w-[220px] opacity-60 pointer-events-none z-[30] hidden md:block">
+        <div className="theme-vertical-lines-top-wrap absolute left-[1%] md:left-[3%] lg:left-[4%] top-[150px] md:top-[180px] lg:top-[200px] bottom-[140px] md:bottom-[180px] lg:bottom-[200px] w-[120px] md:w-[180px] lg:w-[220px] opacity-60 pointer-events-none z-[30] hidden md:block">
           <Image
             src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/Безымянный-3.svg`}
             alt="Vertical Lines"
@@ -538,7 +538,7 @@ export default async function Home() {
 
         {/* Eng pastki qism - Kulrang konda (Footer) */}
         <div id="boglanish" className="w-full h-[140px] md:h-[180px] lg:h-[200px] bg-[#1a1a1a] relative z-20 flex items-center justify-center">
-          <div className="absolute left-[1%] md:left-[3%] lg:left-[4%] top-0 bottom-0 w-[120px] md:w-[180px] lg:w-[220px] opacity-70 pointer-events-none z-[31] hidden md:block">
+          <div className="theme-vertical-lines-bottom-wrap absolute left-[1%] md:left-[3%] lg:left-[4%] top-0 bottom-0 w-[120px] md:w-[180px] lg:w-[220px] opacity-70 pointer-events-none z-[31] hidden md:block">
             <Image
               src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/Безымянный-3.svg`}
               alt="Vertical Lines Bottom"
