@@ -246,7 +246,7 @@ export default function PortfolioGrid({ akaGroups }: PortfolioGridProps) {
 
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative flex items-center justify-center w-full h-full px-16 md:px-24"
+            className="relative flex items-center justify-center w-full h-full px-8 py-8 md:px-16 md:py-12"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -254,8 +254,8 @@ export default function PortfolioGrid({ akaGroups }: PortfolioGridProps) {
               src={images[currentIndex].src}
               alt={`Portfolio rasm ${currentIndex + 1}`}
               style={{
-                maxWidth: "90vw",
-                maxHeight: "85vh",
+                maxWidth: "82vw",
+                maxHeight: "78vh",
                 width: "auto",
                 height: "auto",
                 objectFit: "contain",
