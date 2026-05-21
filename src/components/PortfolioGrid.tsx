@@ -34,25 +34,12 @@ type GalleryItem =
 const portfolioData = data as PortfolioData;
 const ITEMS_VISIBLE = 6;
 const STEP = 2;
-const lightboxSlotStyles = {
-  left: {
-    x: "-34vw",
-    scale: 0.52,
-    opacity: 0.38,
-    zIndex: 10,
-  },
-  center: {
-    x: 0,
-    scale: 1,
-    opacity: 1,
-    zIndex: 30,
-  },
-  right: {
-    x: "34vw",
-    scale: 0.52,
-    opacity: 0.38,
-    zIndex: 10,
-  },
+const lightboxPositions = {
+  left: { x: "-34vw", scale: 0.52, opacity: 0.36, zIndex: 10 },
+  center: { x: 0, scale: 1, opacity: 1, zIndex: 30 },
+  right: { x: "34vw", scale: 0.52, opacity: 0.36, zIndex: 10 },
+  hiddenLeft: { x: "-54vw", scale: 0.35, opacity: 0, zIndex: 0 },
+  hiddenRight: { x: "54vw", scale: 0.35, opacity: 0, zIndex: 0 },
 };
 
 function getBasePath() {
@@ -68,23 +55,23 @@ function getProjectImages(project: PortfolioProject) {
   return [project.image, ...projectImages].map(withBasePath);
 }
 
-function getLightboxSlots(currentIndex: number, total: number) {
-  if (total <= 1) {
-    return [{ index: currentIndex, position: "center" as const }];
-  }
+function getCircularOffset(index: number, currentIndex: number, total: number) {
+  let offset = index - currentIndex;
 
-  if (total === 2) {
-    return [
-      { index: currentIndex, position: "center" as const },
-      { index: (currentIndex + 1) % total, position: "right" as const },
-    ];
-  }
+  if (offset > total / 2) offset -= total;
+  if (offset < -total / 2) offset += total;
 
-  return [
-    { index: (currentIndex - 1 + total) % total, position: "left" as const },
-    { index: currentIndex, position: "center" as const },
-    { index: (currentIndex + 1) % total, position: "right" as const },
-  ];
+  return offset;
+}
+
+function getLightboxPosition(index: number, currentIndex: number, total: number) {
+  const offset = getCircularOffset(index, currentIndex, total);
+
+  if (offset === 0) return lightboxPositions.center;
+  if (offset === -1) return lightboxPositions.left;
+  if (offset === 1) return lightboxPositions.right;
+
+  return offset < 0 ? lightboxPositions.hiddenLeft : lightboxPositions.hiddenRight;
 }
 
 export default function PortfolioGrid({ akaGroups }: PortfolioGridProps) {
@@ -113,7 +100,6 @@ export default function PortfolioGrid({ akaGroups }: PortfolioGridProps) {
   const maxStartIndex = Math.max(0, galleryItems.length - ITEMS_VISIBLE);
   const safeStartIndex = Math.min(startIndex, maxStartIndex);
   const visibleItems = galleryItems.slice(safeStartIndex, safeStartIndex + ITEMS_VISIBLE);
-  const lightboxSlots = getLightboxSlots(currentIndex, images.length);
 
   const openLightbox = (item: GalleryItem) => {
     setImages(item.images.map((src) => ({ src: encodeURI(src) })));
@@ -288,11 +274,11 @@ export default function PortfolioGrid({ akaGroups }: PortfolioGridProps) {
             onClick={(e) => e.stopPropagation()}
             className="relative flex items-center justify-center w-full h-full px-8 py-8 md:px-16 md:py-12"
           >
-            {lightboxSlots.map((slot) => (
+            {images.map((image, index) => (
               <motion.div
-                key={slot.index}
+                key={image.src}
                 initial={false}
-                animate={lightboxSlotStyles[slot.position]}
+                animate={getLightboxPosition(index, currentIndex, images.length)}
                 transition={{
                   x: { type: "spring", stiffness: 155, damping: 27, mass: 0.95 },
                   scale: { type: "spring", stiffness: 170, damping: 27, mass: 0.9 },
@@ -302,8 +288,8 @@ export default function PortfolioGrid({ akaGroups }: PortfolioGridProps) {
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={images[slot.index].src}
-                  alt={slot.position === "center" ? `Portfolio rasm ${currentIndex + 1}` : ""}
+                  src={image.src}
+                  alt={index === currentIndex ? `Portfolio rasm ${currentIndex + 1}` : ""}
                   style={{
                     maxWidth: "82vw",
                     maxHeight: "78vh",
