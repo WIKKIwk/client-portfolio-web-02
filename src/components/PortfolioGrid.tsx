@@ -38,7 +38,7 @@ const lightboxImageVariants = {
   enter: (direction: number) => ({
     x: direction > 0 ? "34vw" : "-34vw",
     scale: 0.52,
-    opacity: 0.32,
+    opacity: 1,
     zIndex: 15,
   }),
   center: {
@@ -50,7 +50,7 @@ const lightboxImageVariants = {
   exit: (direction: number) => ({
     x: direction > 0 ? "-34vw" : "34vw",
     scale: 0.52,
-    opacity: 0.32,
+    opacity: 1,
     zIndex: 10,
   }),
 };
@@ -307,7 +307,6 @@ export default function PortfolioGrid({ akaGroups }: PortfolioGridProps) {
                 transition={{
                   x: { type: "spring", stiffness: 150, damping: 26, mass: 0.95 },
                   scale: { type: "spring", stiffness: 165, damping: 26, mass: 0.9 },
-                  opacity: { duration: 0.18, ease: "easeOut" },
                 }}
                 className="absolute inset-0 flex items-center justify-center"
               >
