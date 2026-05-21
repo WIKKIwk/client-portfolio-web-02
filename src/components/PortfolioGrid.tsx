@@ -36,19 +36,22 @@ const ITEMS_VISIBLE = 6;
 const STEP = 2;
 const lightboxImageVariants = {
   enter: (direction: number) => ({
-    x: direction > 0 ? "32vw" : "-32vw",
+    x: direction > 0 ? "34vw" : "-34vw",
     scale: 0.52,
-    opacity: 0.38,
+    opacity: 0.32,
+    zIndex: 15,
   }),
   center: {
     x: 0,
     scale: 1,
     opacity: 1,
+    zIndex: 25,
   },
   exit: (direction: number) => ({
-    x: direction > 0 ? "-24vw" : "24vw",
-    scale: 0.68,
-    opacity: 0,
+    x: direction > 0 ? "-34vw" : "34vw",
+    scale: 0.52,
+    opacity: 0.32,
+    zIndex: 10,
   }),
 };
 
@@ -293,31 +296,36 @@ export default function PortfolioGrid({ akaGroups }: PortfolioGridProps) {
               </>
             )}
 
-            <AnimatePresence initial={false} custom={slideDirection} mode="popLayout">
-              <motion.img
+            <AnimatePresence initial={false} custom={slideDirection}>
+              <motion.div
                 key={currentIndex}
-                src={images[currentIndex].src}
-                alt={`Portfolio rasm ${currentIndex + 1}`}
                 custom={slideDirection}
                 variants={lightboxImageVariants}
                 initial="enter"
                 animate="center"
                 exit="exit"
                 transition={{
-                  x: { type: "spring", stiffness: 145, damping: 24, mass: 0.95 },
-                  scale: { type: "spring", stiffness: 170, damping: 25, mass: 0.85 },
-                  opacity: { duration: 0.22, ease: "easeOut" },
+                  x: { type: "spring", stiffness: 150, damping: 26, mass: 0.95 },
+                  scale: { type: "spring", stiffness: 165, damping: 26, mass: 0.9 },
+                  opacity: { duration: 0.18, ease: "easeOut" },
                 }}
-                style={{
-                  maxWidth: "82vw",
-                  maxHeight: "78vh",
-                  width: "auto",
-                  height: "auto",
-                  objectFit: "contain",
-                }}
-                className="rounded-sm shadow-[0_0_80px_rgba(0,0,0,0.8)] select-none"
-                draggable={false}
-              />
+                className="absolute inset-0 flex items-center justify-center"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={images[currentIndex].src}
+                  alt={`Portfolio rasm ${currentIndex + 1}`}
+                  style={{
+                    maxWidth: "82vw",
+                    maxHeight: "78vh",
+                    width: "auto",
+                    height: "auto",
+                    objectFit: "contain",
+                  }}
+                  className="rounded-sm shadow-[0_0_80px_rgba(0,0,0,0.8)] select-none"
+                  draggable={false}
+                />
+              </motion.div>
             </AnimatePresence>
           </div>
 
@@ -353,12 +361,6 @@ export default function PortfolioGrid({ akaGroups }: PortfolioGridProps) {
         </div>
       )}
 
-      <style jsx global>{`
-        @keyframes fadeIn {
-          from { opacity: 0; transform: scale(0.97); }
-          to { opacity: 1; transform: scale(1); }
-        }
-      `}</style>
     </>
   );
 }
