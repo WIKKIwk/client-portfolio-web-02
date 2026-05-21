@@ -36,16 +36,19 @@ const ITEMS_VISIBLE = 6;
 const STEP = 2;
 const lightboxImageVariants = {
   enter: (direction: number) => ({
-    x: direction > 0 ? 130 : -130,
-    filter: "blur(10px)",
+    x: direction > 0 ? "32vw" : "-32vw",
+    scale: 0.52,
+    opacity: 0.38,
   }),
   center: {
     x: 0,
-    filter: "blur(0px)",
+    scale: 1,
+    opacity: 1,
   },
   exit: (direction: number) => ({
-    x: direction > 0 ? -130 : 130,
-    filter: "blur(10px)",
+    x: direction > 0 ? "-24vw" : "24vw",
+    scale: 0.68,
+    opacity: 0,
   }),
 };
 
@@ -301,8 +304,9 @@ export default function PortfolioGrid({ akaGroups }: PortfolioGridProps) {
                 animate="center"
                 exit="exit"
                 transition={{
-                  x: { type: "spring", stiffness: 220, damping: 28, mass: 0.9 },
-                  filter: { duration: 0.22, ease: "easeOut" },
+                  x: { type: "spring", stiffness: 145, damping: 24, mass: 0.95 },
+                  scale: { type: "spring", stiffness: 170, damping: 25, mass: 0.85 },
+                  opacity: { duration: 0.22, ease: "easeOut" },
                 }}
                 style={{
                   maxWidth: "82vw",
