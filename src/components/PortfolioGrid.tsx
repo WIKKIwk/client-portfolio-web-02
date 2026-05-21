@@ -248,6 +248,30 @@ export default function PortfolioGrid({ akaGroups }: PortfolioGridProps) {
             onClick={(e) => e.stopPropagation()}
             className="relative flex items-center justify-center w-full h-full px-8 py-8 md:px-16 md:py-12"
           >
+            {images.length > 1 && (
+              <>
+                <div className="pointer-events-none absolute left-2 md:left-8 top-1/2 -translate-y-1/2 hidden lg:block w-[18vw] max-w-[240px] h-[48vh] opacity-25 blur-[2px]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={images[(currentIndex - 1 + images.length) % images.length].src}
+                    alt=""
+                    className="h-full w-full object-contain select-none"
+                    draggable={false}
+                  />
+                </div>
+
+                <div className="pointer-events-none absolute right-2 md:right-8 top-1/2 -translate-y-1/2 hidden lg:block w-[18vw] max-w-[240px] h-[48vh] opacity-25 blur-[2px]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={images[(currentIndex + 1) % images.length].src}
+                    alt=""
+                    className="h-full w-full object-contain select-none"
+                    draggable={false}
+                  />
+                </div>
+              </>
+            )}
+
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               key={currentIndex}
