@@ -34,6 +34,20 @@ type GalleryItem =
 const portfolioData = data as PortfolioData;
 const ITEMS_VISIBLE = 6;
 const STEP = 2;
+const lightboxImageVariants = {
+  enter: (direction: number) => ({
+    x: direction > 0 ? 130 : -130,
+    filter: "blur(10px)",
+  }),
+  center: {
+    x: 0,
+    filter: "blur(0px)",
+  },
+  exit: (direction: number) => ({
+    x: direction > 0 ? -130 : 130,
+    filter: "blur(10px)",
+  }),
+};
 
 function getBasePath() {
   return process.env.NEXT_PUBLIC_BASE_PATH || "";
@@ -52,6 +66,7 @@ export default function PortfolioGrid({ akaGroups }: PortfolioGridProps) {
   const [open, setOpen] = useState(false);
   const [images, setImages] = useState<{ src: string }[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [slideDirection, setSlideDirection] = useState(1);
   const [startIndex, setStartIndex] = useState(0);
 
   const akaItems: GalleryItem[] = akaGroups.map((group) => ({
@@ -78,6 +93,7 @@ export default function PortfolioGrid({ akaGroups }: PortfolioGridProps) {
   const openLightbox = (item: GalleryItem) => {
     setImages(item.images.map((src) => ({ src: encodeURI(src) })));
     setCurrentIndex(0);
+    setSlideDirection(1);
     setOpen(true);
   };
 
@@ -93,10 +109,12 @@ export default function PortfolioGrid({ akaGroups }: PortfolioGridProps) {
   }, []);
 
   const nextImage = useCallback(() => {
+    setSlideDirection(1);
     setCurrentIndex((prev) => (prev + 1) % images.length);
   }, [images.length]);
 
   const prevImage = useCallback(() => {
+    setSlideDirection(-1);
     setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
   }, [images.length]);
 
@@ -272,22 +290,31 @@ export default function PortfolioGrid({ akaGroups }: PortfolioGridProps) {
               </>
             )}
 
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              key={currentIndex}
-              src={images[currentIndex].src}
-              alt={`Portfolio rasm ${currentIndex + 1}`}
-              style={{
-                maxWidth: "82vw",
-                maxHeight: "78vh",
-                width: "auto",
-                height: "auto",
-                objectFit: "contain",
-                animation: "fadeIn 0.25s ease",
-              }}
-              className="rounded-sm shadow-[0_0_80px_rgba(0,0,0,0.8)] select-none"
-              draggable={false}
-            />
+            <AnimatePresence initial={false} custom={slideDirection} mode="popLayout">
+              <motion.img
+                key={currentIndex}
+                src={images[currentIndex].src}
+                alt={`Portfolio rasm ${currentIndex + 1}`}
+                custom={slideDirection}
+                variants={lightboxImageVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{
+                  x: { type: "spring", stiffness: 220, damping: 28, mass: 0.9 },
+                  filter: { duration: 0.22, ease: "easeOut" },
+                }}
+                style={{
+                  maxWidth: "82vw",
+                  maxHeight: "78vh",
+                  width: "auto",
+                  height: "auto",
+                  objectFit: "contain",
+                }}
+                className="rounded-sm shadow-[0_0_80px_rgba(0,0,0,0.8)] select-none"
+                draggable={false}
+              />
+            </AnimatePresence>
           </div>
 
           {images.length > 1 && (
