@@ -34,25 +34,25 @@ type GalleryItem =
 const portfolioData = data as PortfolioData;
 const ITEMS_VISIBLE = 6;
 const STEP = 2;
-const lightboxImageVariants = {
-  enter: (direction: number) => ({
-    x: direction > 0 ? "34vw" : "-34vw",
+const lightboxSlotStyles = {
+  left: {
+    x: "-34vw",
     scale: 0.52,
-    opacity: 1,
-    zIndex: 15,
-  }),
+    opacity: 0.38,
+    zIndex: 10,
+  },
   center: {
     x: 0,
     scale: 1,
     opacity: 1,
-    zIndex: 25,
+    zIndex: 30,
   },
-  exit: (direction: number) => ({
-    x: direction > 0 ? "-34vw" : "34vw",
+  right: {
+    x: "34vw",
     scale: 0.52,
-    opacity: 1,
+    opacity: 0.38,
     zIndex: 10,
-  }),
+  },
 };
 
 function getBasePath() {
@@ -68,11 +68,29 @@ function getProjectImages(project: PortfolioProject) {
   return [project.image, ...projectImages].map(withBasePath);
 }
 
+function getLightboxSlots(currentIndex: number, total: number) {
+  if (total <= 1) {
+    return [{ index: currentIndex, position: "center" as const }];
+  }
+
+  if (total === 2) {
+    return [
+      { index: currentIndex, position: "center" as const },
+      { index: (currentIndex + 1) % total, position: "right" as const },
+    ];
+  }
+
+  return [
+    { index: (currentIndex - 1 + total) % total, position: "left" as const },
+    { index: currentIndex, position: "center" as const },
+    { index: (currentIndex + 1) % total, position: "right" as const },
+  ];
+}
+
 export default function PortfolioGrid({ akaGroups }: PortfolioGridProps) {
   const [open, setOpen] = useState(false);
   const [images, setImages] = useState<{ src: string }[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [slideDirection, setSlideDirection] = useState(1);
   const [startIndex, setStartIndex] = useState(0);
 
   const akaItems: GalleryItem[] = akaGroups.map((group) => ({
@@ -95,11 +113,11 @@ export default function PortfolioGrid({ akaGroups }: PortfolioGridProps) {
   const maxStartIndex = Math.max(0, galleryItems.length - ITEMS_VISIBLE);
   const safeStartIndex = Math.min(startIndex, maxStartIndex);
   const visibleItems = galleryItems.slice(safeStartIndex, safeStartIndex + ITEMS_VISIBLE);
+  const lightboxSlots = getLightboxSlots(currentIndex, images.length);
 
   const openLightbox = (item: GalleryItem) => {
     setImages(item.images.map((src) => ({ src: encodeURI(src) })));
     setCurrentIndex(0);
-    setSlideDirection(1);
     setOpen(true);
   };
 
@@ -115,12 +133,10 @@ export default function PortfolioGrid({ akaGroups }: PortfolioGridProps) {
   }, []);
 
   const nextImage = useCallback(() => {
-    setSlideDirection(1);
     setCurrentIndex((prev) => (prev + 1) % images.length);
   }, [images.length]);
 
   const prevImage = useCallback(() => {
-    setSlideDirection(-1);
     setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
   }, [images.length]);
 
@@ -272,48 +288,22 @@ export default function PortfolioGrid({ akaGroups }: PortfolioGridProps) {
             onClick={(e) => e.stopPropagation()}
             className="relative flex items-center justify-center w-full h-full px-8 py-8 md:px-16 md:py-12"
           >
-            {images.length > 1 && (
-              <>
-                <div className="pointer-events-none absolute left-2 md:left-8 top-1/2 -translate-y-1/2 hidden lg:block w-[18vw] max-w-[240px] h-[48vh] opacity-25 blur-[2px]">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={images[(currentIndex - 1 + images.length) % images.length].src}
-                    alt=""
-                    className="h-full w-full object-contain select-none"
-                    draggable={false}
-                  />
-                </div>
-
-                <div className="pointer-events-none absolute right-2 md:right-8 top-1/2 -translate-y-1/2 hidden lg:block w-[18vw] max-w-[240px] h-[48vh] opacity-25 blur-[2px]">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={images[(currentIndex + 1) % images.length].src}
-                    alt=""
-                    className="h-full w-full object-contain select-none"
-                    draggable={false}
-                  />
-                </div>
-              </>
-            )}
-
-            <AnimatePresence initial={false} custom={slideDirection}>
+            {lightboxSlots.map((slot) => (
               <motion.div
-                key={currentIndex}
-                custom={slideDirection}
-                variants={lightboxImageVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
+                key={slot.index}
+                initial={false}
+                animate={lightboxSlotStyles[slot.position]}
                 transition={{
-                  x: { type: "spring", stiffness: 150, damping: 26, mass: 0.95 },
-                  scale: { type: "spring", stiffness: 165, damping: 26, mass: 0.9 },
+                  x: { type: "spring", stiffness: 155, damping: 27, mass: 0.95 },
+                  scale: { type: "spring", stiffness: 170, damping: 27, mass: 0.9 },
+                  opacity: { duration: 0.18, ease: "easeOut" },
                 }}
                 className="absolute inset-0 flex items-center justify-center"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={images[currentIndex].src}
-                  alt={`Portfolio rasm ${currentIndex + 1}`}
+                  src={images[slot.index].src}
+                  alt={slot.position === "center" ? `Portfolio rasm ${currentIndex + 1}` : ""}
                   style={{
                     maxWidth: "82vw",
                     maxHeight: "78vh",
@@ -325,7 +315,7 @@ export default function PortfolioGrid({ akaGroups }: PortfolioGridProps) {
                   draggable={false}
                 />
               </motion.div>
-            </AnimatePresence>
+            ))}
           </div>
 
           {images.length > 1 && (
