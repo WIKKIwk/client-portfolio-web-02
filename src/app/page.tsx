@@ -575,7 +575,7 @@ export default async function Home() {
               alt="Qo'l"
               width={700}
               height={700}
-              className="w-[230px] md:w-[380px] lg:w-[620px] xl:w-[700px] object-contain drop-shadow-md"
+              className="w-[230px] md:w-[380px] lg:w-[620px] xl:w-[700px] object-contain"
             />
           </div>
         </div>
