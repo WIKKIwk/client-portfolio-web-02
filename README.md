@@ -26,6 +26,7 @@ Conventions:
 - Put one image named `base.*`, `aka.*`, `cover.*`, or `main.*` in that folder to use it as the cover image.
 - Add any other images in the same folder or in nested folders; they will appear inside that group.
 - Supported image types: `png`, `jpg`, `jpeg`, `webp`, `gif`, `avif`, `svg`.
+- Top-level numbered folders `1` through `99` are pre-created as placeholders, so you can upload images into them on GitHub without creating folders from scratch.
 
 Example:
 
