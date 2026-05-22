@@ -2,36 +2,23 @@
 
 import { useState, useEffect, useCallback, type KeyboardEvent as ReactKeyboardEvent } from "react";
 import Image from "next/image";
-import data from "@/lib/portfolioData.json";
-import { portfolioProjects } from "@/lib/seo";
 import FadeInItem from "@/components/FadeInItem";
 import type { GalleryGroup } from "@/lib/galleryTypes";
 import { AnimatePresence, motion } from "framer-motion";
-
-type PortfolioData = Record<string, string[]>;
-type PortfolioProject = (typeof portfolioProjects)[number];
 
 type PortfolioGridProps = {
   akaGroups: GalleryGroup[];
 };
 
 type GalleryItem =
-  | {
-      id: string;
-      title: string;
-      cover: string;
-      images: string[];
-      kind: "aka";
-    }
-  | {
-      id: string;
-      title: string;
-      cover: string;
-      images: string[];
-      kind: "project";
-    };
+  {
+    id: string;
+    title: string;
+    cover: string;
+    images: string[];
+    kind: "aka";
+  };
 
-const portfolioData = data as PortfolioData;
 const ITEMS_VISIBLE = 6;
 const STEP = 2;
 const lightboxPositions = {
@@ -41,19 +28,6 @@ const lightboxPositions = {
   hiddenLeft: { x: "-54vw", scale: 0.35, opacity: 0, zIndex: 0 },
   hiddenRight: { x: "54vw", scale: 0.35, opacity: 0, zIndex: 0 },
 };
-
-function getBasePath() {
-  return process.env.NEXT_PUBLIC_BASE_PATH || "";
-}
-
-function withBasePath(src: string) {
-  return encodeURI(`${getBasePath()}${src}`);
-}
-
-function getProjectImages(project: PortfolioProject) {
-  const projectImages = portfolioData[project.id] || [];
-  return [project.image, ...projectImages].map(withBasePath);
-}
 
 function getCircularOffset(index: number, currentIndex: number, total: number) {
   let offset = index - currentIndex;
@@ -87,16 +61,7 @@ export default function PortfolioGrid({ akaGroups }: PortfolioGridProps) {
     images: group.images,
     kind: "aka",
   }));
-
-  const projectItems: GalleryItem[] = portfolioProjects.map((project) => ({
-    id: project.id,
-    title: project.name,
-    cover: project.image,
-    images: getProjectImages(project),
-    kind: "project",
-  }));
-
-  const galleryItems = [...akaItems, ...projectItems];
+  const galleryItems = akaItems;
   const maxStartIndex = Math.max(0, galleryItems.length - ITEMS_VISIBLE);
   const safeStartIndex = Math.min(startIndex, maxStartIndex);
   const visibleItems = galleryItems.slice(safeStartIndex, safeStartIndex + ITEMS_VISIBLE);

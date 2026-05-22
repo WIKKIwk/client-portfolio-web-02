@@ -89,41 +89,7 @@ export const serviceOffers = [
   },
 ];
 
-export const portfolioProjects = [
-  {
-    id: "project-1",
-    name: "Qadoq dizayn portfolio loyihasi 1",
-    image: `${siteUrl}/porta/1.webp`,
-  },
-  {
-    id: "project-2",
-    name: "Package design portfolio loyihasi 2",
-    image: `${siteUrl}/porta/2.webp`,
-  },
-  {
-    id: "project-3",
-    name: "Premium qadoqlash dizayni portfolio loyihasi 3",
-    image: `${siteUrl}/porta/3.webp`,
-  },
-  {
-    id: "project-4",
-    name: "Mahsulot qadoqlash dizayni portfolio loyihasi 4",
-    image: `${siteUrl}/porta/4.webp`,
-  },
-  {
-    id: "project-5",
-    name: "Poligrafik qadoq dizayn portfolio loyihasi 5",
-    image: `${siteUrl}/porta/5.webp`,
-  },
-  {
-    id: "project-6",
-    name: "Brend uchun package design portfolio loyihasi 6",
-    image: `${siteUrl}/porta/6.webp`,
-  },
-];
-
 export const sitemapImages = [
   ogImage,
   `${siteUrl}/logo.svg`,
-  ...portfolioProjects.map((project) => project.image),
 ];

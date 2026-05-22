@@ -10,9 +10,9 @@ import LightRays from "@/components/LightRays";
 import Image from "next/image";
 import { Poppins } from "next/font/google";
 import { getAkaGalleryGroups } from "@/lib/akaGallery";
+import type { GalleryGroup } from "@/lib/galleryTypes";
 import {
   contactPhones,
-  portfolioProjects,
   seoKeywords,
   serviceOffers,
   siteDescription,
@@ -24,7 +24,8 @@ import {
 
 const poppinsFont = Poppins({ subsets: ['latin'], weight: ['300', '400', '500', '600', '700'] });
 
-const jsonLd = {
+function createJsonLd(akaGroups: GalleryGroup[]) {
+  return {
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -142,17 +143,17 @@ const jsonLd = {
     {
       "@type": "ItemList",
       "@id": `${siteUrl}/#portfolio-list`,
-      name: "Qadoq dizayn portfolio",
+      name: "Aka galereyasi",
       description:
-        "Qadoqdizayn.uz portfolio bo'limidagi package design va qadoq dizayn ishlari.",
-      itemListElement: portfolioProjects.map((project, index) => ({
+        "Qadoqdizayn.uz aka papkalaridan o'qiladigan portfolio rasmlar galereyasi.",
+      itemListElement: akaGroups.map((group, index) => ({
         "@type": "ListItem",
         position: index + 1,
         item: {
           "@type": "CreativeWork",
-          "@id": `${siteUrl}/#${project.id}`,
-          name: project.name,
-          image: project.image,
+          "@id": `${siteUrl}/#${group.id}`,
+          name: group.label,
+          image: group.cover,
           creator: {
             "@id": `${siteUrl}/#islombek-botirov`,
           },
@@ -194,9 +195,11 @@ const jsonLd = {
     },
   ],
 };
+}
 
 export default async function Home() {
   const akaGroups = await getAkaGalleryGroups();
+  const jsonLd = createJsonLd(akaGroups);
 
   return (
     <>
