@@ -66,7 +66,7 @@ export default function AnimatedIntro() {
                             alt="Qo'l rasmi"
                             width={220}
                             height={220}
-                            className="theme-signature-svg w-full max-w-[100px] lg:max-w-[160px] xl:max-w-[220px] h-auto object-contain drop-shadow-2xl opacity-40 lg:opacity-100"
+                            className="theme-signature-svg w-full max-w-[100px] lg:max-w-[160px] xl:max-w-[220px] h-auto object-contain opacity-40 lg:opacity-100"
                         />
                     )}
                 </div>
